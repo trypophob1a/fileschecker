@@ -1,0 +1,3 @@
+![Build Status](https://github.com/trypophob1a/fileschecker/actions/workflows/tests.yml/badge.svg?event=push)
+[![Coverage Status](https://coveralls.io/repos/github/trypophob1a/fileschecker/badge.svg)](https://coveralls.io/github/trypophob1a/fileschecker)
+[![Go Report Card](https://goreportcard.com/badge/github.com/trypophob1a/fileschecker)](https://goreportcard.com/report/github.com/trypophob1a/fileschecker)

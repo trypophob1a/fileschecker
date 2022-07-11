@@ -1,0 +1,5 @@
+./testdata/files/helo wrld!.txt
+./testdata/files/dddd.txt
+./testdata/files/fffs.txt
+./testdata/files/err.txt
+./testdata/files/ust do it!.txt
