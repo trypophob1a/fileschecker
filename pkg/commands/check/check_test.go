@@ -3,13 +3,14 @@ package check
 import (
 	"bufio"
 	"fmt"
-	"github.com/trypophob1a/fileschecker/pkg/strategy"
 	"log"
 	"os"
 	"path/filepath"
 	"testing"
 
 	"github.com/stretchr/testify/require"
+
+	"github.com/trypophob1a/fileschecker/pkg/strategy"
 )
 
 // func TestCommandCheck_contains(t *testing.T) {
@@ -62,7 +63,6 @@ func TestCommandCheck_Check(t *testing.T) {
 		actual = append(actual, filename)
 	})
 	require.Equal(t, expect, actual)
-
 }
 
 func TestCommandCheck_Execute(t *testing.T) {
@@ -123,7 +123,7 @@ func TestCommandCheck_Execute(t *testing.T) {
 	}, lines)
 	_ = os.RemoveAll("./testdata/uniq_files/")
 
-	//testing errors
+	// testing errors
 	first, _ = filepath.Abs("./testdata/first.txt")
 	second, _ = filepath.Abs("./testdata/second_with_error_path_for_copy.txt")
 	checker = CommandCheck{first: first, second: second, percent: 90}
@@ -136,5 +136,4 @@ func TestCommandCheck_Execute(t *testing.T) {
 	checker.Execute()
 	require.NoDirExists(t, "./testdata/uniq_files")
 	_ = os.RemoveAll("./testdata/uniq_files/")
-
 }

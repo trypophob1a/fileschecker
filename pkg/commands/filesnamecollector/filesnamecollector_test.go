@@ -25,7 +25,6 @@ func TestCommandCollect_getFilesName(t *testing.T) {
 	files := NewCollector().getFilesName("./testdata", extension)
 
 	require.Equal(t, expect, files)
-
 }
 
 func TestCommandCollect_checkExtension(t *testing.T) {
