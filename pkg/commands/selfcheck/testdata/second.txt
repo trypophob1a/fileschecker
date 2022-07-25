@@ -1,0 +1,8 @@
+./testdata/files/helo wrld!.txt
+./testdata/files/dddd.txt
+./testdata/files/fffs.txt
+./testdata/files/all_errors.txt
+./testdata/files/ust do it!.txt
+./testdata/files/hello world!.txt
+./testdata/files/all_errirs.txt
+./testdata/files/all_erors.txt

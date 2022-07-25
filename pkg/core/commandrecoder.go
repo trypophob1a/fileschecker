@@ -1,9 +1,6 @@
 package core
 
 import (
-	"reflect"
-	"strings"
-
 	"github.com/trypophob1a/fileschecker/pkg/interfaces"
 )
 
@@ -19,17 +16,8 @@ func (r *CommandRecorder) Add(command string, action func()) {
 	r.commands[command] = action
 }
 
-func (r *CommandRecorder) AddExecutor(command interfaces.Executed) {
-	r.Add(r.getCommandName(reflect.TypeOf(command).String()), command.Execute)
-}
-
-func (r *CommandRecorder) getCommandName(command string) string {
-	for i, r := range command {
-		if r == '.' {
-			return strings.ToLower(command[i+8:])
-		}
-	}
-	return command
+func (r *CommandRecorder) AddExecutor(command string, executor interfaces.Executed) {
+	r.Add(command, executor.Execute)
 }
 
 func (r *CommandRecorder) Listener(command string) {
