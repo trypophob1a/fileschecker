@@ -56,7 +56,7 @@ func TestMoveFile(t *testing.T) {
 	require.Error(t, err)
 
 	file = CreateFile(filePath)
-	err = MoveFile(filePath, "./testdata/move/file_test!.txt")
+	err = MoveFile(filePath, "./testdata/move/")
 	println("ДА ДА ДА ДА !")
 	require.Error(t, err)
 	file.Close()
