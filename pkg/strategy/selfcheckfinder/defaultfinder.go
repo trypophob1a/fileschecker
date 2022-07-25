@@ -35,3 +35,7 @@ func (f DefaultFinder) unSerializeTxt() []string {
 		return append(collection, value)
 	}, make([]string, 0, 50))
 }
+
+func hello() {
+	println("hello")
+}
