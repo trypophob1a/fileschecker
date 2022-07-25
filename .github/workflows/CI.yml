@@ -38,7 +38,6 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Linters
-        if: ${{ !contains(env.BRANCH, 'main') && !contains(env.BRANCH, 'master') }}
         uses: golangci/golangci-lint-action@v2
         with:
           version: v1.46.2
@@ -65,7 +64,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Unit tests
-        run: go test -v -count=1 -race -timeout=1m ./...
+        run: go test -v -count=1 -race -timeout=1m ${{ env.BRANCH }}/...
         working-directory: ${{ env.BRANCH }}
 
   coverage:
@@ -89,13 +88,19 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Calc coverage
-        run: go test -v -covermode=count -coverprofile=coverage.out ./...
+        run: go test -v -covermode=count -coverprofile=coverage.out  ${{ env.BRANCH }}/...
         working-directory: ${{ env.BRANCH }}
 
       - name: Convert coverage.out to coverage.lcov
         uses: jandelgado/gcov2lcov-action@v1.0.6
         with:
           working-directory: ${{ env.BRANCH }}
+
+      - name: Coveralls
+        uses: coverallsapp/github-action@v1.1.2
+        with:
+          github-token: ${{ secrets.github_token }}
+          path-to-lcov: ${{ env.BRANCH }}/coverage.lcov
 
       - name: Is sufficient coverage
         run: |
@@ -109,9 +114,3 @@ jobs:
 
       - name: Watch
         run: ls -a
-
-      - name: Coveralls
-        uses: coverallsapp/github-action@v1.1.2
-        with:
-          github-token: ${{ secrets.github_token }}
-          path-to-lcov: ${{ env.BRANCH }}/coverage.lcov
