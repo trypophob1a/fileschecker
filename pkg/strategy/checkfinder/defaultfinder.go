@@ -1,4 +1,4 @@
-package strategy
+package checkfinder
 
 import (
 	fuzzy "github.com/reallyliri/go-fuzzywuzzy"

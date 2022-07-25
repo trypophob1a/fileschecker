@@ -6,37 +6,13 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"sort"
 	"testing"
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/trypophob1a/fileschecker/pkg/strategy"
+	"github.com/trypophob1a/fileschecker/pkg/strategy/checkfinder"
 )
-
-// func TestCommandCheck_contains(t *testing.T) {
-//	tests := []struct {
-//		slice    []string
-//		search   string
-//		expected bool
-//	}{
-//		{slice: []string{"1", "2", "3", "4", "5"}, search: "4", expected: true},
-//		{slice: []string{"Abc", "cba", "bdb"}, search: "BDB", expected: true},
-//		{slice: []string{"Abc", "cba", "bdb"}, search: "aaa", expected: false},
-//		{slice: []string{"hello world!", "cba", "bdb"}, search: "hello worl", expected: true},
-//		{slice: []string{"bdb", "cba", "hello world!"}, search: "hello wor l d!", expected: true},
-//		{slice: []string{"cba", "hello world!", "bdb"}, search: "helo wrld!", expected: true},
-//		{slice: []string{"bdb", "cba", "hello world!"}, search: "hello user!", expected: false},
-//	}
-//
-//	for _, tc := range tests {
-//		tc := tc
-//		t.Run(tc.search, func(t *testing.T) {
-//			result := NewCheck().contains(tc.slice, tc.search, 90)
-//			require.Equal(t, tc.expected, result)
-//
-//		})
-//	}
-//}
 
 func TestNewCheck(t *testing.T) {
 	checker := NewCheck()
@@ -47,21 +23,23 @@ func TestCommandCheck_Check(t *testing.T) {
 	checker := &CommandCheck{first: "./testdata/first.txt", second: "./testdata/second.txt", percent: 90}
 	expect := []string{
 		"./testdata/files/dddd.txt",
-		"./testdata/files/fffs.txt",
 		"./testdata/files/err.txt",
+		"./testdata/files/fffs.txt",
 	}
 
 	actual := make([]string, 0)
 	checker.Check(checker.percent, func(filename string) {
 		actual = append(actual, filename)
 	})
+	sort.Strings(actual)
 	require.Equal(t, expect, actual)
 
-	checker.SetFinder(strategy.NewDefaultFinder())
+	checker.SetFinder(checkfinder.NewHashmapFinder())
 	actual = make([]string, 0)
 	checker.Check(checker.percent, func(filename string) {
 		actual = append(actual, filename)
 	})
+	sort.Strings(actual)
 	require.Equal(t, expect, actual)
 }
 

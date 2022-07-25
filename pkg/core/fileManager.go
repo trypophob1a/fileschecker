@@ -50,12 +50,26 @@ func CopyFile(from, to string) error {
 	return nil
 }
 
+func MoveFile(from, to string) error {
+	err := CopyFile(from, to)
+	if err != nil {
+		return err
+	}
+
+	err = os.Remove(from)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func GetFileName(filename string) string {
 	_, name := filepath.Split(filename)
 	return strings.ToLower(strings.TrimSuffix(name, path.Ext(filename)))
 }
 
-func UnSerializeTxt[T interfaces.Collection](path string, adder func(col T, value string) T, coll T) T {
+func UnSerializeTxt[T interfaces.Collection](path string, adder func(collection T, value string) T, newCollection T) T {
 	file, err := os.Open(path)
 	if err != nil {
 		fmt.Printf("%v\n", err)
@@ -67,8 +81,8 @@ func UnSerializeTxt[T interfaces.Collection](path string, adder func(col T, valu
 	scanner := bufio.NewScanner(file)
 
 	for scanner.Scan() {
-		coll = adder(coll, scanner.Text())
+		newCollection = adder(newCollection, scanner.Text())
 	}
 
-	return coll
+	return newCollection
 }

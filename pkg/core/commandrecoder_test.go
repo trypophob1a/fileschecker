@@ -9,13 +9,6 @@ import (
 	"github.com/trypophob1a/fileschecker/pkg/core/testdata"
 )
 
-func TestCommandRecorder_getCommandName(t *testing.T) {
-	recorder := NewCommandRecorder()
-	require.Equal(t, "check", recorder.getCommandName("commands.commandCheck"))
-	require.Equal(t, "check", recorder.getCommandName("check"))
-	require.NotEqual(t, "check", recorder.getCommandName("notCheck"))
-}
-
 func TestCommandRecorder_Add(t *testing.T) {
 	recorder := NewCommandRecorder()
 	require.Empty(t, recorder.getCommands())
@@ -28,7 +21,7 @@ func TestCommandRecorder_Add(t *testing.T) {
 func TestCommandRecorder_AddExecutor(t *testing.T) {
 	recorder := NewCommandRecorder()
 	require.Empty(t, recorder.getCommands())
-	recorder.AddExecutor(testdata.NewExecutor("Test"))
+	recorder.AddExecutor("executor", testdata.NewExecutor("Test"))
 	require.NotEmpty(t, recorder.getCommands())
 	require.Contains(t, recorder.getCommands(), "executor")
 }

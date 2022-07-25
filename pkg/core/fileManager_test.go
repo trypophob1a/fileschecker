@@ -44,6 +44,25 @@ func TestCopyFile(t *testing.T) {
 	_ = os.RemoveAll("./testdata/copy")
 }
 
+func TestMoveFile(t *testing.T) {
+	filePath := "./testdata/move_file_test!.txt"
+	file := CreateFile(filePath)
+	file.Close()
+	_ = MoveFile(filePath, "./testdata/move/move_file_test!.txt")
+	require.FileExists(t, "./testdata/move/move_file_test!.txt")
+	require.DirExists(t, "./testdata/move")
+
+	err := MoveFile("./testdata/", "./testdata/move/move_file_test!.txt")
+	require.Error(t, err)
+
+	file = CreateFile(filePath)
+	err = MoveFile(filePath, "./testdata/move/move_file_test!.txt")
+	require.Error(t, err)
+	file.Close()
+	_ = os.Remove(filePath)
+	_ = os.RemoveAll("./testdata/move")
+}
+
 func TestGetFileName(t *testing.T) {
 	require.Equal(t, "testexecutor", GetFileName("./testdata/TestExecutor.go"))
 }
