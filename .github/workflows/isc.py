@@ -21,8 +21,8 @@ lines = file.readlines()
 if not lines:
    print(f"\033[92m test there are no files for testing")
    command = os.popen('echo "NOT_FILE=1" >> $GITHUB_ENV')
-   print(command.read())
-   print(command.close())
+   command.read()
+   command.close()
    sys.exit(0)
 
 regex = r"LF:(\d+)|LH:(\d+)"

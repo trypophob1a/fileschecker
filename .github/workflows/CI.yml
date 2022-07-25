@@ -104,6 +104,8 @@ jobs:
           fi
         working-directory: ${{ env.BRANCH }}
 
+      - name: WATCH
+        run: echo ${{ env.NOT_FILE }}
       - name: Coveralls
         if: '${{ env.NOT_FILE }} != "1"'
         uses: coverallsapp/github-action@v1.1.2
