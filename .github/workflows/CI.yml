@@ -53,6 +53,7 @@ jobs:
           else
             echo "BRANCH=${GITHUB_REF#refs/heads/}" | perl -pe 's/--\d+//g'
             echo "$BRANCH" >> $GITHUB_ENV
+            echo ${{ env.BRANCH }}
           fi
 
       - name: Set up Go
@@ -67,7 +68,6 @@ jobs:
         run: |
           echo ${{ env.BRANCH }}
           echo ${BRANCH}
-          echo ${GITHUB_ENV.BRANCH}
           go test -v -count=1 -race -timeout=1m "$BRANCH"/...
         working-directory: ${{ env.BRANCH }}
 
