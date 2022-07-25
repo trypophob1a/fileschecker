@@ -31,7 +31,7 @@ jobs:
             echo "BRANCH=${PWD}" >> $GITHUB_ENV
           else
             BRANCH="${GITHUB_REF#refs/heads/}"
-            echo $BRANCH | perl -pe 's/--\d+//g' >> $GITHUB_ENV
+            echo "$BRANCH" | perl -pe 's/--\d+//g' >> $GITHUB_ENV
           fi
 
       - name: Check out code
@@ -53,7 +53,7 @@ jobs:
             echo "BRANCH=${PWD}" >> $GITHUB_ENV
           else
             BRANCH="${GITHUB_REF#refs/heads/}"
-            echo $BRANCH | perl -pe 's/--\d+//g' >> $GITHUB_ENV
+            echo "$BRANCH" | perl -pe 's/--\d+//g' >> $GITHUB_ENV
           fi
 
       - name: Set up Go
@@ -77,7 +77,7 @@ jobs:
             echo "BRANCH=${PWD}" >> $GITHUB_ENV
           else
             BRANCH="${GITHUB_REF#refs/heads/}"
-            echo $BRANCH | perl -pe 's/--\d+//g' >> $GITHUB_ENV
+            echo "$BRANCH" | perl -pe 's/--\d+//g' >> $GITHUB_ENV
           fi
       - name: Install Go
         if: success()
