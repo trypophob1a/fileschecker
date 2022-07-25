@@ -52,7 +52,7 @@ jobs:
             echo "BRANCH=${PWD}" >> $GITHUB_ENV
           else
             result=$(echo "${GITHUB_REF#refs/heads/}" | perl -pe 's/--\d+//g')
-            echo "$result" >> $GITHUB_ENV
+            echo "$result/" >> $GITHUB_ENV
             echo ${{ env.BRANCH }} 
           fi
 
