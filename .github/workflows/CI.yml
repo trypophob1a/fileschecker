@@ -76,8 +76,7 @@ jobs:
           if [[ ${GITHUB_REF#refs/heads/} == 'main' || ${GITHUB_REF#refs/heads/} == 'master' ]]; then
             echo "BRANCH=${PWD}" >> $GITHUB_ENV
           else
-            echo "BRANCH=${GITHUB_REF#refs/heads/}" | perl -pe 's/--\d+//g'
-            echo "$BRANCH" >> $GITHUB_ENV
+            echo "BRANCH=$(echo "${GITHUB_REF#refs/heads/}" | perl -pe 's/--\d+//g')" >> $GITHUB_ENV
           fi
       - name: Install Go
         if: success()
@@ -97,12 +96,6 @@ jobs:
         with:
           working-directory: ${{ env.BRANCH }}
 
-      - name: Coveralls
-        uses: coverallsapp/github-action@v1.1.2
-        with:
-          github-token: ${{ secrets.github_token }}
-          path-to-lcov: ${{ env.BRANCH }}/coverage.lcov
-
       - name: Is sufficient coverage
         run: |
           cd "${GITHUB_WORKSPACE}/.github/workflows"
@@ -113,5 +106,8 @@ jobs:
           fi
         working-directory: ${{ env.BRANCH }}
 
-      - name: Watch
-        run: ls -a
+      - name: Coveralls
+        uses: coverallsapp/github-action@v1.1.2
+        with:
+          github-token: ${{ secrets.github_token }}
+          path-to-lcov: ${{ env.BRANCH }}/coverage.lcov
