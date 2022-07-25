@@ -52,8 +52,8 @@ jobs:
           if [[ ${GITHUB_REF#refs/heads/} == 'main' || ${GITHUB_REF#refs/heads/} == 'master' ]]; then
             echo "BRANCH=${PWD}" >> $GITHUB_ENV
           else
-            BRANCH="${GITHUB_REF#refs/heads/}"
-            echo "$BRANCH" | perl -pe 's/--\d+//g' >> $GITHUB_ENV
+            echo "BRANCH=${GITHUB_REF#refs/heads/}" | perl -pe 's/--\d+//g'
+            echo "$BRANCH" >> $GITHUB_ENV
           fi
 
       - name: Set up Go
@@ -76,8 +76,8 @@ jobs:
           if [[ ${GITHUB_REF#refs/heads/} == 'main' || ${GITHUB_REF#refs/heads/} == 'master' ]]; then
             echo "BRANCH=${PWD}" >> $GITHUB_ENV
           else
-            BRANCH="${GITHUB_REF#refs/heads/}"
-            echo "$BRANCH" | perl -pe 's/--\d+//g' >> $GITHUB_ENV
+            echo "BRANCH=${GITHUB_REF#refs/heads/}" | perl -pe 's/--\d+//g'
+            echo "$BRANCH" >> $GITHUB_ENV
           fi
       - name: Install Go
         if: success()
