@@ -31,7 +31,12 @@ func (f *DefaultFinder) SetResource(fileTxt string) {
 }
 
 func (f DefaultFinder) unSerializeTxt() []string {
+	hello()
 	return core.UnSerializeTxt(f.resourcePath, func(collection []string, value string) []string {
 		return append(collection, value)
 	}, make([]string, 0, 50))
+}
+
+func hello() {
+	println("hello")
 }
