@@ -107,8 +107,10 @@ jobs:
           fi
         working-directory: ${{ env.BRANCH }}
 
-      - name: Coveralls
+      - name: Watch
         run: ls -a
+
+      - name: Coveralls
         uses: coverallsapp/github-action@v1.1.2
         with:
           github-token: ${{ secrets.github_token }}
