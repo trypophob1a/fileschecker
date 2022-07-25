@@ -97,6 +97,7 @@ jobs:
 
       - name: Is sufficient coverage
         run: |
+          echo cat ${{ env.BRANCH }}/coverage.lcov
           cd "${GITHUB_WORKSPACE}/.github/workflows"
           if [[ ${GITHUB_REF#refs/heads/} == 'main' || ${GITHUB_REF#refs/heads/} == 'master' ]]; then
             python isc.py ${{ env.BRANCH }}/coverage.lcov $MIN_PERCENT_FOR_COVERAGE
