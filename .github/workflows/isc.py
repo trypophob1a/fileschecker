@@ -17,8 +17,9 @@ except ValueError:
     sys.exit(1)
 
 lines = file.readlines()
-print(lines)
-print(lines)
+if not lines:
+   print(f"\033[92m test there are no files for testing")
+   sys.exit(0)
 
 regex = r"LF:(\d+)|LH:(\d+)"
 full = 0
