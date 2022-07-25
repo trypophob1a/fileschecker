@@ -52,7 +52,6 @@ jobs:
             echo "BRANCH=${PWD}" >> $GITHUB_ENV
           else
             echo "BRANCH=$(echo "${GITHUB_REF#refs/heads/}" | perl -pe 's/--\d+//g')" >> $GITHUB_ENV
-            echo ${{ env.BRANCH }} 
           fi
 
       - name: Set up Go
@@ -65,9 +64,7 @@ jobs:
 
       - name: Unit tests
         run: |
-          echo ${{ env.BRANCH }}
-          echo ${BRANCH}
-          go test -v -count=1 -race -timeout=1m "$BRANCH"/...
+          go test -v -count=1 -race -timeout=1m  ${{ env.BRANCH }}/...
         working-directory: ${{ env.BRANCH }}
 
   coverage:
