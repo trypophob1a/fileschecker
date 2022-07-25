@@ -17,9 +17,9 @@ except ValueError:
     sys.exit(1)
 
 lines = file.readlines()
-print len(lines)
-print len(lines)
-print len(lines)
+print lines
+print lines
+
 regex = r"LF:(\d+)|LH:(\d+)"
 full = 0
 part = 0
