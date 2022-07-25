@@ -105,7 +105,7 @@ jobs:
         working-directory: ${{ env.BRANCH }}
 
       - name: Coveralls
-        if: ${{ env.NOT_FILE }} != 1
+        if: ${{ env.NOT_FILE != 1 }}
         uses: coverallsapp/github-action@v1.1.2
         with:
           github-token: ${{ secrets.github_token }}
