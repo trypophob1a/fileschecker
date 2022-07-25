@@ -64,7 +64,11 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Unit tests
-        run: go test -v -count=1 -race -timeout=1m "$BRANCH"/...
+        run: |
+          echo ${{ env.BRANCH }}
+          echo ${BRANCH}
+          echo ${GITHUB_ENV.BRANCH}
+          go test -v -count=1 -race -timeout=1m "$BRANCH"/...
         working-directory: ${{ env.BRANCH }}
 
   coverage:
