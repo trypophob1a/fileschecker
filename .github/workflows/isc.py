@@ -20,7 +20,7 @@ except ValueError:
 lines = file.readlines()
 if not lines:
    print(f"\033[92m test there are no files for testing")
-   command = os.popen('echo \"NOT_FILE=1\" | perl -pe \'s/--\d+//g\')\" >> $GITHUB_ENV')
+   command = os.popen('echo "NOT_FILE=1" >> $GITHUB_ENV')
    print(command.read())
    print(command.close())
    sys.exit(0)
