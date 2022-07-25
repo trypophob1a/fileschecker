@@ -65,7 +65,7 @@ jobs:
       - name: Unit tests
         run: |
           echo ls -a
-          go test -v -count=1 -race -timeout=1m  ./${{ env.BRANCH }}/...
+          go test -v -count=1 -race -timeout=1m  ./...
         working-directory: ${{ env.BRANCH }}
 
   coverage:
