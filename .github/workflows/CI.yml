@@ -51,7 +51,8 @@ jobs:
           if [[ ${GITHUB_REF#refs/heads/} == 'main' || ${GITHUB_REF#refs/heads/} == 'master' ]]; then
             echo "BRANCH=${PWD}" >> $GITHUB_ENV
           else
-            echo "BRANCH=${GITHUB_REF#refs/heads/}" | perl -pe 's/--\d+//g'
+            BRANCH=${GITHUB_REF#refs/heads/}
+            echo "${BRANCH}" | perl -pe 's/--\d+//g' >> BRANCH
             echo "$BRANCH" >> $GITHUB_ENV
             echo ${{ env.BRANCH }}
           fi
